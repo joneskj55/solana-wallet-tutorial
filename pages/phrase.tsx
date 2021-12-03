@@ -7,6 +7,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 
 // Import Bip39 to generate a phrase and convert it to a seed:
+import * as Bip39 from "bip39";
 
 // Import the Keypair class from Solana's web3.js library:
 
@@ -22,7 +23,7 @@ const Phrase: NextPage = () => {
     // (a) review the import guidance on lines 9 and 11
     // (b) generate a mnemonic phrase by importing Bip39 and then implementing the appropriate method on the imported Bip39 instance
     // Documentation Reference: https://github.com/bitcoinjs/bip39
-    const generatedMnemonic = "";
+    const generatedMnemonic = Bip39.generateMnemonic();
 
     // This line saves the mnemonic phrase to context state so we can display it for the wallet user to copy
     setMnemonic(generatedMnemonic);
