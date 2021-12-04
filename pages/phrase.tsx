@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import * as Bip39 from "bip39";
 
 // Import the Keypair class from Solana's web3.js library:
+import { Keypair } from "@solana/web3.js";
 
 const Phrase: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -30,13 +31,14 @@ const Phrase: NextPage = () => {
 
     // (c) convert the mnemonic to seed bytes and make sure it's 32-bytes (Hint: console log the seed to see how many bytes you have vs how many you need)
     // Documentation Reference: https://github.com/bitcoinjs/bip39
-    const seed = new Uint8Array();
+    const seed = Bip39.mnemonicToSeedSync(generatedMnemonic).slice(0,32);
+    console.log(seed);
 
     // (d) use the seed to generate a new account (i.e. a new keypair)
     // Documentation Reference:
     //   https://solana-labs.github.io/solana-web3.js/classes/Keypair.html
     //   https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#fromSeed
-    const newAccount = null;
+    const newAccount = Keypair.fromSeed(seed);
 
     // This line sets the account to context state so it can be used by the app
     setAccount(newAccount);
